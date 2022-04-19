@@ -15,63 +15,16 @@ import {
 } from "../constants/vendorConstants";
 
 export const addVendor =
-  (
-    vendorAddress,
-    vendorAddress2,
-    vendorCity,
-    vendorCode,
-    vendorCompany,
-    vendorEmail,
-    vendorFax,
-    vendorFips,
-    vendorHours,
-    vendorMobile,
-    vendorName,
-    vendorNotes,
-    vendorPassword,
-    vendorPhone,
-    vendorPhone2,
-    vendorState,
-    vendorUserId,
-    vendorWebsite,
-    vendorZip
-  ) =>
+  (vendor  ) =>
   async (dispatch) => {
     try {
       dispatch({
         type: VENDOR_REGISTER_REQUEST,
       });
 
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
       const { data } = await axios.post(
         "https://api.notary.ink/api.php/records/vendors",
-        {
-          vendorAddress,
-          vendorAddress2,
-          vendorCity,
-          vendorCode,
-          vendorCompany,
-          vendorEmail,
-          vendorFax,
-          vendorFips,
-          vendorHours,
-          vendorMobile,
-          vendorName,
-          vendorNotes,
-          vendorPassword,
-          vendorPhone,
-          vendorPhone2,
-          vendorState,
-          vendorUserId,
-          vendorWebsite,
-          vendorZip,
-        },
-        config
+        vendor
       );
       const d = await axios.get(
         `https://api.notary.ink/api.php/records/vendors/${data}`
@@ -83,6 +36,7 @@ export const addVendor =
         payload: d.data,
       });
     } catch (error) {
+      console.log(error);
       dispatch({
         type: VENDOR_REGISTER_FAIL,
         payload:
