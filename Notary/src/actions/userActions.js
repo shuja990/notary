@@ -35,7 +35,6 @@ export const login = (email, password) => async (dispatch) => {
     const { data } = await axios.get(
       "https://api.notary.ink/api.php/records/users"
     );
-    console.log(data);
     const u = data.records.find(
       (e) => e.email === email && e.password === password
     );
@@ -45,7 +44,7 @@ export const login = (email, password) => async (dispatch) => {
         type: USER_LOGIN_SUCCESS,
         payload: u,
       });
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      localStorage.setItem("userInfo", JSON.stringify(u));
     } else {
       dispatch({
         type: USER_LOGIN_FAIL,
@@ -177,7 +176,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       type: USER_LOGIN_SUCCESS,
       payload: d.data,
     });
-    localStorage.setItem("userInfo", JSON.stringify(userInfo.id));
+    localStorage.setItem("userInfo", JSON.stringify(d.data));
   } catch (error) {
     const message =
       error.response && error.response.data.message

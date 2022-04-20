@@ -19,16 +19,15 @@
 // vendorWebsite,
 // vendorZip
 import React, { useState, useEffect } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getUserDetails, updateUserProfile } from "../actions/userActions";
-import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 import { addVendor } from "../actions/vendorActions";
 import FormContainer from "../components/FormContainer";
 
-const VendorScreen = ({ location, history }) => {
+const AddVendorScreen = ({ location, history }) => {
   const dispatch = useDispatch();
 
   const vendorRegister = useSelector((state) => state.vendorRegister);
@@ -44,7 +43,11 @@ const VendorScreen = ({ location, history }) => {
   const [vendorEmail, setVendorEmail] = useState("");
   const [vendorFax, setVendorFax] = useState("");
   const [vendorFips, setVendorFips] = useState("");
-  const [vendorHours, setVendorHours] = useState("");
+  const [vendorHours, setVendorHours] = useState({
+    days: "",
+    startTime: "",
+    endTime: "",
+  });
   const [vendorMobile, setVendorMobile] = useState("");
   const [vendorName, setVendorName] = useState("");
   const [vendorNotes, setVendorNotes] = useState("");
@@ -55,7 +58,6 @@ const VendorScreen = ({ location, history }) => {
   const [vendorUserId, setVendorUserId] = useState(userInfo.id);
   const [vendorWebsite, setVendorWebsite] = useState("");
   const [vendorZip, setVendorZip] = useState("");
-
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
@@ -65,35 +67,33 @@ const VendorScreen = ({ location, history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     let vendor = {
-      vendorAddress: vendorAddress.toString(),
-      vendorAddress2 : vendorAddress2.toString(),
-      vendorCity: vendorCity.toString(),
-      vendorCode:vendorCode.toString(),
-      vendorCompany:vendorCompany.toString(),
-      vendorEmail:vendorEmail.toString(),
-      vendorFax:vendorFax.toString(),
-      // vendorFips:vendorFips.toString(),
-      vendorHours:vendorHours.toString(),
-      // vendorMobile:vendorMobile.toString(),
-      vendorName:vendorName.toString(),
-      vendorNotes:vendorNotes.toString(),
-      vendorPassword:vendorPassword.toString(),
-      vendorPhone:vendorPhone.toString(),
-      vendorPhone2:vendorPhone2.toString(),
-      vendorState:vendorState.toString(),
-      vendorUserId:vendorUserId,
-      vendorWebsite:vendorWebsite.toString(),
-      vendorZip:vendorZip.toString(),
-    }
+      vendorAddress: vendorAddress,
+      vendorAddress2: vendorAddress2,
+      vendorCity: vendorCity,
+      vendorCode: vendorCode,
+      vendorCompany: vendorCompany,
+      vendorEmail: vendorEmail,
+      vendorFax: vendorFax,
+      vendorFips: vendorFips,
+      // vendorHours: vendorHours,
+      vendorMobile: vendorMobile,
+      vendorName: vendorName,
+      vendorNotes: vendorNotes,
+      vendorPassword: vendorPassword,
+      vendorPhone: vendorPhone,
+      vendorPhone2: vendorPhone2,
+      vendorState: vendorState,
+      vendorUserId: vendorUserId,
+      vendorWebsite: vendorWebsite,
+      vendorZip: vendorZip,
+    };
     console.log(vendor);
-    dispatch(
-      addVendor(vendor)
-    );
+    dispatch(addVendor(vendor));
   };
 
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
+      <h1>Add Vendor</h1>
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
@@ -156,11 +156,62 @@ const VendorScreen = ({ location, history }) => {
         <Form.Group controlId="">
           <Form.Label>State</Form.Label>
           <Form.Control
-            type="text"
-            placeholder="Enter State"
-            value={vendorState}
+            as="select"
             onChange={(e) => setVendorState(e.target.value)}
-          ></Form.Control>
+          >
+            <option value="">Select State</option>
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="DC">District Of Columbia</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+          </Form.Control>
         </Form.Group>
         <Form.Group controlId="">
           <Form.Label>Zip Code</Form.Label>
@@ -199,21 +250,32 @@ const VendorScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="">
-          <Form.Label>Vendor Hours</Form.Label>
+          <Form.Label>Days of the Week you are Open</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter hours"
-            value={vendorHours}
-            onChange={(e) => setVendorHours(e.target.value)}
+            placeholder="Mon-Fri"
+            value={vendorHours.days}
+            onChange={(e) =>
+              setVendorHours({ ...vendorHours, days: e.target.value })
+            }
           ></Form.Control>
-        </Form.Group>
-        <Form.Group controlId="">
-          <Form.Label>Mobile Number</Form.Label>
+          <Form.Label>Office Hours Start</Form.Label>
           <Form.Control
-            type="text"
-            placeholder="Enter mobile number"
-            value={vendorMobile}
-            onChange={(e) => setVendorMobile(e.target.value)}
+            type="number"
+            placeholder="Enter Start time"
+            value={vendorHours.startTime}
+            onChange={(e) =>
+              setVendorHours({ ...vendorHours, startTime: e.target.value })
+            }
+          ></Form.Control>
+          <Form.Label>Office Hours End</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Enter End time"
+            value={vendorHours.endTime}
+            onChange={(e) =>
+              setVendorHours({ ...vendorHours, endTime: e.target.value })
+            }
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="">
@@ -226,7 +288,7 @@ const VendorScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="">
-          <Form.Label>Vendor Phone 2</Form.Label>
+          <Form.Label>Mobile Office</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter Phone 2"
@@ -260,4 +322,4 @@ const VendorScreen = ({ location, history }) => {
   );
 };
 
-export default VendorScreen;
+export default AddVendorScreen;

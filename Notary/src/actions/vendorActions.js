@@ -53,12 +53,8 @@ export const getVendorDetails = (id) => async (dispatch, getState) => {
       type: VENDOR_DETAILS_REQUEST,
     });
 
-    const {
-      vendorInfo: { vendorInfo },
-    } = getState();
-
     const { data } = await axios.get(
-      `https://api.notary.ink/api.php/records/vendors/${vendorInfo.id}`
+      `https://api.notary.ink/api.php/records/vendors/${id}`
     );
 
     dispatch({
@@ -84,13 +80,12 @@ export const updateVendorProfile = (vendor) => async (dispatch, getState) => {
     });
 
     const { data } = await axios.put(
-      `https://api.notary.ink/api.php/records/vendors/${vendor.id}`,
+      `https://api.notary.ink/api.php/records/vendors/${vendor.vendorId}`,
       vendor
     );
     const d = await axios.get(
-      `https://api.notary.ink/api.php/records/vendors/${vendor.id}`
+      `https://api.notary.ink/api.php/records/vendors/${vendor.vendorId}`
     );
-    console.log(d);
     dispatch({
       type: VENDOR_UPDATE_PROFILE_SUCCESS,
       payload: d.data,
@@ -107,16 +102,19 @@ export const updateVendorProfile = (vendor) => async (dispatch, getState) => {
   }
 };
 
-export const listVendors = (user) => async (dispatch) => {
+export const listVendors = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: VENDOR_LIST_REQUEST,
     });
+    const {
+      userLogin: { userInfo },
+    } = getState()
 
     const { data } = await axios.get(
-      `https://api.notary.ink/api.php/records/vendors/`
+      `https://api.notary.ink/api.php/records/vendors`
     );
-    let d = data.filter((e) => e.vendorUserID === user.id);
+    let d = data.records.filter((e) => e.vendorUserId === userInfo.id);
 
     dispatch({
       type: VENDOR_LIST_SUCCESS,
