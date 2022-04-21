@@ -12,6 +12,7 @@ import AddVendorScreen from './screens/AddVendor'
 import VendorEdit from './screens/EditVendor'
 import AddVendorListing from './screens/AddListing'
 import ListingsScreen from './screens/ListingsScreen'
+import ListingEdit from './screens/EditListing'
 
 const App = () => {
   return (
@@ -22,22 +23,23 @@ const App = () => {
           <Route path='/login' component={LoginScreen} />
           <Route path='/register' component={RegisterScreen} />
           <Route path='/profile' component={ProfileScreen} />
-          <Route path='/search/:keyword' component={HomeScreen} exact />
-          <Route path='/page/:pageNumber' component={HomeScreen} exact />
-          <Route path='/vendors' component={VendorScreen} exact />
+          {/* <Route path='/search/:keyword' component={HomeScreen} exact /> */}
+          {/* <Route path='/page/:pageNumber' component={HomeScreen} exact /> */}
+          <Route path='/' component={VendorScreen} exact />
 
           <Route path='/vendors/addvendor' component={AddVendorScreen} exact />
           <Route path='/vendors/edit/:id' component={VendorEdit} exact />
           <Route path='/listings/:id' component={AddVendorListing} exact />
           <Route path='/vendorlistings/:id' component={ListingsScreen} exact />
+          <Route path='/listings/edit/:id' component={ListingEdit} exact />
 
 
-          <Route
+          {/* <Route
             path='/search/:keyword/page/:pageNumber'
             component={HomeScreen}
-            exact
-          />
-          <Route path='/' component={HomeScreen} exact />
+            exact */}
+          {/* /> */}
+          {/* <Route path='/' component={HomeScreen} exact /> */}
         </Container>
       </main>
       <Footer />

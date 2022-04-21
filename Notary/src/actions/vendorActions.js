@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  VENDOR_ALL_LIST_FAIL,
+  VENDOR_ALL_LIST_REQUEST,
+  VENDOR_ALL_LIST_SUCCESS,
   VENDOR_DETAILS_FAIL,
   VENDOR_DETAILS_REQUEST,
   VENDOR_DETAILS_SUCCESS,
@@ -123,6 +126,33 @@ export const listVendors = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: VENDOR_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listAllVendors = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: VENDOR_ALL_LIST_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const { data } = await axios.get(
+      `https://api.notary.ink/api.php/records/vendors`
+    );
+    dispatch({
+      type: VENDOR_ALL_LIST_SUCCESS,
+      payload: data.records,
+    });
+  } catch (error) {
+    dispatch({
+      type: VENDOR_ALL_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

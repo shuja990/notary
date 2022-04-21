@@ -106,7 +106,7 @@ const VendorEdit = ({ match, history }) => {
 
   return (
     <>
-      <Link to="/vendors" className="btn btn-light my-3">
+      <Link to="/" className="btn btn-light my-3">
         Go Back
       </Link>
       <FormContainer>

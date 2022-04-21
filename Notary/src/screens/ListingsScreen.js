@@ -57,6 +57,7 @@ const ListingsScreen = ({ history, match }) => {
                 <th>End Date</th>
                 <th>Level</th>
                 <th>Vendor ID</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -70,6 +71,14 @@ const ListingsScreen = ({ history, match }) => {
                   <td>{product.endDate}</td>
                   <td>{product.level}</td>
                   <td>{product.vendorId}</td>
+                  <td>
+                    {" "}
+                    <LinkContainer to={`/listings/edit/${product.ListingId}`}>
+                      <Button variant="light" className="btn-sm">
+                        <i className="fas fa-plus"></i> Edit Listing
+                      </Button>
+                    </LinkContainer>
+                  </td>
                 </tr>
               ))}
             </tbody>

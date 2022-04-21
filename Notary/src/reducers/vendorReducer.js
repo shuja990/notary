@@ -14,6 +14,9 @@ import {
   VENDOR_UPDATE_PROFILE_REQUEST,
   VENDOR_UPDATE_PROFILE_SUCCESS,
   VENDOR_UPDATE_PROFILE_RESET,
+  VENDOR_ALL_LIST_REQUEST,
+  VENDOR_ALL_LIST_SUCCESS,
+  VENDOR_ALL_LIST_FAIL,
 } from "../constants/vendorConstants";
 
 export const vendorRegisterReducer = (state = {}, action) => {
@@ -66,6 +69,21 @@ export const vendorListReducer = (state = { vendors: [] }, action) => {
     case VENDOR_LIST_SUCCESS:
       return { loading: false, vendors: action.payload };
     case VENDOR_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    case VENDOR_LIST_RESET:
+      return { vendors: [] };
+    default:
+      return state;
+  }
+};
+
+export const vendorListAllReducer = (state = { vendors: [] }, action) => {
+  switch (action.type) {
+    case VENDOR_ALL_LIST_REQUEST:
+      return { loading: true };
+    case VENDOR_ALL_LIST_SUCCESS:
+      return { loading: false, vendors: action.payload };
+    case VENDOR_ALL_LIST_FAIL:
       return { loading: false, error: action.payload };
     case VENDOR_LIST_RESET:
       return { vendors: [] };
