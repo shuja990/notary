@@ -239,7 +239,7 @@ const VendorEdit = ({ match, history }) => {
             <Form.Group controlId="">
               <Form.Label>Zip Code</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Enter Zip Code"
                 value={vendorZip}
                 onChange={(e) => setVendorZip(e.target.value)}
@@ -248,7 +248,7 @@ const VendorEdit = ({ match, history }) => {
             <Form.Group controlId="">
               <Form.Label>FIPS</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Enter FIPS Code"
                 value={vendorFips}
                 onChange={(e) => setVendorFips(e.target.value)}
@@ -257,7 +257,7 @@ const VendorEdit = ({ match, history }) => {
             <Form.Group controlId="">
               <Form.Label>Vendor Code</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Vendor Code"
                 value={vendorCode}
                 onChange={(e) => setVendorCode(e.target.value)}
@@ -304,7 +304,7 @@ const VendorEdit = ({ match, history }) => {
             <Form.Group controlId="">
               <Form.Label>Vendor Phone</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Enter Phone"
                 value={vendorPhone}
                 onChange={(e) => setVendorPhone(e.target.value)}
@@ -313,8 +313,8 @@ const VendorEdit = ({ match, history }) => {
             <Form.Group controlId="">
               <Form.Label>Mobile Office</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter Phone 2"
+                type="number"
+                placeholder="Enter Mobile"
                 value={vendorPhone2}
                 onChange={(e) => setVendorPhone2(e.target.value)}
               ></Form.Control>
@@ -322,7 +322,7 @@ const VendorEdit = ({ match, history }) => {
             <Form.Group controlId="">
               <Form.Label>Fax</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Enter Fax Number"
                 value={vendorFax}
                 onChange={(e) => setVendorFax(e.target.value)}
