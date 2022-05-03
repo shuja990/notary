@@ -12,6 +12,8 @@ import VendorEdit from './screens/EditVendor'
 import AddVendorListing from './screens/AddListing'
 import ListingsScreen from './screens/ListingsScreen'
 import ListingEdit from './screens/EditListing'
+import HomePage from './screens/HomePage'
+import ListingScreen from './screens/ListingScreen'
 
 const App = () => {
   return (
@@ -24,7 +26,9 @@ const App = () => {
           <Route path='/profile' component={ProfileScreen} />
           {/* <Route path='/search/:keyword' component={HomeScreen} exact /> */}
           {/* <Route path='/page/:pageNumber' component={HomeScreen} exact /> */}
-          <Route path='/' component={VendorScreen} exact />
+          <Route path='/dashboard' component={VendorScreen} exact />
+          <Route path='/' component={HomePage} exact />
+          <Route path='/vendor/:id' component={ListingScreen} exact />
 
           <Route path='/vendors/addvendor' component={AddVendorScreen} exact />
           <Route path='/vendors/edit/:id' component={VendorEdit} exact />
